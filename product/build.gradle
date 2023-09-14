@@ -1,0 +1,60 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.15'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.dotd'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '11'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	// web
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// jpa
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	// redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+	// 직렬화, 역직렬화
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
+	// cache
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
+
+	// aop
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+
+	// lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// test
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// JUnit 5 의존성 추가
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

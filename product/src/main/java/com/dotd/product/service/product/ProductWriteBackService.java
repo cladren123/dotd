@@ -93,7 +93,6 @@ public class ProductWriteBackService {
         product.setDescription(dto.getDescription());
         product.setPrice(dto.getPrice());
 
-
         // 캐시 수정
         redisTemplate.opsForValue().set("product" + product.getId(), product);
 
@@ -102,8 +101,6 @@ public class ProductWriteBackService {
         Operation operation = new Operation("UPDATE", productJsonNode);
         String serializedData = operationSerialize(operation);
         stringRedisTemplate.opsForList().rightPush("productOperationList", serializedData);
-
-
 
         // 응답
         ProductResponseDto result = productMapper.productToProductResponseDto(product);
